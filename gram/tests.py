@@ -18,3 +18,9 @@ class ImageTestClass(TestCase):
         images = Image.objects.all()
         self.new_image.delete_image()
         self.assertTrue(len(images)==0)
+    #update caption test method
+    def test_update_method(self):
+        self.new_image.save_image()
+        self.new_image.update_caption(self.new_image.id,'live life')
+        image = Image.objects.filter(caption='live life').all()
+        self.assertTrue(len(image)==1)

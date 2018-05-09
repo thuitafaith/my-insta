@@ -11,6 +11,9 @@ class Image(models.Model):
         self.save()
     def delete_image(self):
         self.delete()
+    @classmethod
+    def update_caption(cls,id,caption):
+        cls.objects.filter(id = id).update(caption=caption)
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='pics/')
     Bio = models.TextField()
