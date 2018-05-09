@@ -9,6 +9,8 @@ class Image(models.Model):
 
     def save_image(self):
         self.save()
+    def delete_image(self):
+        self.delete()
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='pics/')
     Bio = models.TextField()
