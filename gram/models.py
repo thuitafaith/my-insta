@@ -1,11 +1,12 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Image(models.Model):
     image_link = models.ImageField(upload_to ='pics/')
     name = models.CharField(max_length=100)
     caption = models.CharField(max_length=100)
     comments = models.TextField()
+    profile = models.ForeignKey('Profile',null=True)
 
     def save_image(self):
         self.save()
@@ -22,7 +23,7 @@ class Image(models.Model):
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='pics/')
     Bio = models.TextField()
-
+    user = models.ForeignKey(User)
     def save_profile(self):
         self.save()
     def delete_profile(self):

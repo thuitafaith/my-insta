@@ -47,3 +47,8 @@ class ProfileTestClass(TestCase):
         profile = Profile.objects.all()
         self.profile.delete_profile()
         self.assertTrue(len(profile)==0)
+    def test_update_method(self):
+        new_profile = 'pics/img3.png','i can'
+        self.profile.update_profile(self.profile.id,new_profile)
+        new_profile = Profile.objects.filter(profile_photo='pics/img3.png',Bio='i can')
+        self.assertTrue(len(new_profile)==1)
