@@ -6,13 +6,22 @@ class ImageTestClass(TestCase):
     def setUp(self):
         self.user =User.objects.create_user('mememe','trytrytry@me')
         self.user.save()
-        self.new_profile = Profile.objects.create(profile_photo='pics/img2.jpg',owner_profile=self.user)
+        self.new_profile = Profile.objects.create(profile_photo='pics/img2.jpg',Bio='live life',owner_profile=self.user)
         self.image = Image.objects.create(image_link='pics/img1.jpg',name ='me',caption='staywoke',owner_profile=self.new_profile)
 
     def test_instance(self):
-        self.user .save()
+        self.user.save()
         self.assertTrue(isinstance(self.image,Image))
-    #save method test
+    """
+    Tests that we can save an Image
+    """
+    def test_save_method(self):
+        self.image.save_image()
+        images = Image.objects.all()
+        self.assertTrue(len(images)>0)
+    """
+    Tests to delete an image
+    """
 #     def test_save_method(self):
 #         self.new_image.save_image()
 #         images = Image.objects.all()
