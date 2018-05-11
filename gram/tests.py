@@ -55,11 +55,11 @@ class ProfileTestClass(TestCase):
         self.new_profile.save_profile()
         profile = Profile.objects.all()
         self.assertTrue(len(profile)>0)
-#     def test_delete_method(self):
-#         self.profile.save_profile()
-#         profile = Profile.objects.all()
-#         self.profile.delete_profile()
-#         self.assertTrue(len(profile)==0)
+    def test_delete_method(self):
+        self.new_profile.save_profile()
+        profile = Profile.objects.all()
+        self.new_profile.delete_profile()
+        self.assertTrue(len(profile)==0)
 #     def test_update_method(self):
 #         new_profile = 'pics/img3.png','i can'
 #         self.profile.update_profile(self.profile.id,new_profile)
