@@ -22,6 +22,11 @@ class ImageTestClass(TestCase):
     """
     Tests to delete an image
     """
+    def test_delete_method(self):
+        self.image.save_image()
+        images = Image.objects.all()
+        self.image.delete_image()
+        self.assertTrue(len(images)==0)
 #     def test_save_method(self):
 #         self.new_image.save_image()
 #         images = Image.objects.all()
