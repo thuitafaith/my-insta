@@ -12,7 +12,7 @@ class Image(models.Model):
     image_link = models.ImageField(upload_to ='pics/',verbose_name ='Select Picture')
     name = models.CharField(max_length=100)
     caption = models.CharField(max_length=60,blank=True,null=True)
-    created_by =models.ForeignKey('Profile',related_name ='owner')
+    owner_profile =models.ForeignKey('Profile',related_name ='owner')
     likes = models.ManyToManyField('Profile',default=False,blank=True,related_name='likes')
     comments = models.ManyToManyField('Profile',default=False,related_name='comments',through ='Comment',through_fields=('image','profile'))
 
