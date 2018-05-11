@@ -51,10 +51,10 @@ class ProfileTestClass(TestCase):
         self.new_profile.save()
     def test_instance(self):
         self.assertTrue(isinstance(self.new_profile,Profile))
-#   def test_save_method(self):
-#         self.profile.save_profile()
-#         profile = Profile.objects.all()
-#         self.assertTrue(len(profile)>0)
+    def test_save_method(self):
+        self.new_profile.save_profile()
+        profile = Profile.objects.all()
+        self.assertTrue(len(profile)>0)
 #     def test_delete_method(self):
 #         self.profile.save_profile()
 #         profile = Profile.objects.all()
