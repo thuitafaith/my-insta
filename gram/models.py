@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 class Image(models.Model):
@@ -39,14 +41,16 @@ class Profile(models.Model):
     Bio = models.TextField()
     owner_profile = models.ForeignKey(User)
     follow = models.ManyToManyField('self', symmetrical=False, default=False, blank=True)
-
+    email_confirmed = models.BooleanField(default=False)
     def save_profile(self):
         self.save()
     def delete_profile(self):
         self.delete()
-    @classmethod
-    def update_profile(cls,id,profile):
-        cls.objects.filter(id=id).update(profile=profile)
+    @receiver(post_save, sender=User)
+    def update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+        instance.profile.save()
 class Comment(models.Model):
     image = models.ForeignKey(Image)
     profile = models.ForeignKey(Profile)

@@ -124,3 +124,4 @@ ACCOUNT_ACTIVATION_DAYS = 7 # one-week activation window
 
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'gram/')
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
