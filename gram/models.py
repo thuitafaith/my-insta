@@ -44,7 +44,9 @@ class Profile(models.Model):
         self.save()
     def delete_profile(self):
         self.delete()
-
+    @classmethod
+    def update_profile(cls,id,profile):
+        cls.objects.filter(id=id).update(profile=profile)
 class Comment(models.Model):
     image = models.ForeignKey(Image)
     profile = models.ForeignKey(Profile)

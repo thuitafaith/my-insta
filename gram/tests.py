@@ -48,7 +48,7 @@ class ProfileTestClass(TestCase):
         self.user =User.objects.create_user('mememe','trytrytry@me')
         self.user.save()
         self.new_profile=Profile(profile_photo='pics/image.jpeg',Bio ='i am me',owner_profile=self.user)
-        self.new_profile.save()
+        # self.new_profile.save()
     def test_instance(self):
         self.assertTrue(isinstance(self.new_profile,Profile))
     def test_save_method(self):
@@ -60,8 +60,9 @@ class ProfileTestClass(TestCase):
         profile = Profile.objects.all()
         self.new_profile.delete_profile()
         self.assertTrue(len(profile)==0)
-#     def test_update_method(self):
-#         new_profile = 'pics/img3.png','i can'
-#         self.profile.update_profile(self.profile.id,new_profile)
-#         new_profile = Profile.objects.filter(profile_photo='pics/img3.png',Bio='i can')
-#         self.assertTrue(len(new_profile)==1)
+    #def test_update_method(self):
+        #self.new_profile.save_profile()
+        #self.new_profile.update_profile(self.new_profile.id,'pics/img3.png','i can')
+        #change_profile = Profile.objects.filter(profile_photo='pics/img3.png',Bio='i can').all()
+        #self.assertTrue(len(change_profile)==1)
+#class CommentTestClass(TestCase):
