@@ -21,7 +21,8 @@ from gram import views as gram_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
-    url(r'^signup/$', gram_views.signup, name ='signup')
-
+    url(r'^signup/$', gram_views.signup, name ='signup'),
+    url(r'^account_activation_sent/$', gram_views.account_activation_sent, name='account_activation_sent'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',gram_views.activate, name='activate')
 
 ]

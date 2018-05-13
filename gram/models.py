@@ -39,18 +39,19 @@ class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='pics/')
     avatar_thumbnail = ImageSpecField(source='profile_photo',processors=[ResizeToFill(100,50)],format='JPEG',options={'quality': 60})
     Bio = models.TextField()
-    owner_profile = models.ForeignKey(User)
+    owner_profile = models.OneToOneField(User)
     follow = models.ManyToManyField('self', symmetrical=False, default=False, blank=True)
     email_confirmed = models.BooleanField(default=False)
     def save_profile(self):
         self.save()
     def delete_profile(self):
         self.delete()
-    @receiver(post_save, sender=User)
-    def update_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-        instance.profile.save()
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(owner_profile=instance)
+    instance.profile.save()
+
 class Comment(models.Model):
     image = models.ForeignKey(Image)
     profile = models.ForeignKey(Profile)
