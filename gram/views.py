@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 def signup(request):
-    current_user = request.username
+    current_user = request.user
     if current_user.is_authenticated():
         return HttpResponseRedirect('/')
     if request.method == 'POST':
@@ -23,7 +23,7 @@ def signup(request):
             user.save()
             current_site = get_current_site(request)
             subject = 'Activate Your Gram Account'
-            message = render_to_string('registration/account_activation_email.html', {
+            message = render_to_string('registration/account_activation.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
