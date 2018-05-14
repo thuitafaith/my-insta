@@ -10,6 +10,9 @@ from .models import Image,Profile,Comment
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from .forms import EditForm
+from django.forms.models import inlineformset_factory
+from django.core.exceptions import PermissionDenied
 
 
 # Create your views here.
@@ -40,7 +43,7 @@ def signup(request):
 def account_activation_sent(request):
     current_user = request.user
     if current_user.is_authenticated():
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('intro')
     return render(request, 'registration/account_activation_sent.html')
 
 
@@ -62,3 +65,30 @@ def activate(request, uidb64, token):
 def intro(request):
 
     return render(request,'intro.html')
+
+@login_required(login_url='/login')
+def profile(request, id):
+    current_user = request.user
+    profile_info = User.objects.get(id=current_user.id)
+
+    edit_form = EditForm(instance=user)
+
+    ProfileInlineFormset = inlineformset_factory(User, Profile, fields=('profile_photo', 'Bio'))
+    formset = ProfileInlineFormset(instance=user)
+
+    if request.user.is_authenticated() and request.user.id == user.id:
+        if request.method == "POST":
+            edit_form = EditForm(request.POST.request.FILES,instance=user)
+            formset = ProfileInlineFormset(request.POST,requests.FILES,instance=user)
+
+            if edit_form.is_valid():
+                created_user = edit_form.save(commit=False)
+                formset = ProfileInlineFormset(request.POST,request.FILES,instance=created_user)
+
+                if formset.is_valid():
+                    created_user.save()
+                    formset.save()
+                    return HttpResponseRedirect(current_user)
+        return render(request, 'profile.html', {'profile_data': profile_info, "formset": formset, 'created_user': edit_form})
+    else:
+        raise PermissionDenied
