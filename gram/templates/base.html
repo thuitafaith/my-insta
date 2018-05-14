@@ -4,9 +4,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    {% if title %}
+      <title>Thegram - {{title}}</title>
+    {% else %}
+    <title>Thegram</title>
+    {% endif %}
+
+    {% block styles %}
+      {% bootstrap3_css %}
+    {% endblock %}
   </head>
   <body>
+    {% include "navbar.html" %}
     <header>
       <h1>Thegram</h1>
       {% if user.is_authenticated %}
