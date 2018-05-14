@@ -78,8 +78,8 @@ def profile(request):
 
     if current_user.is_authenticated() and request.user.id == current_user.id:
         if request.method == "POST":
-            edit_form = EditForm(request.POST.request.FILES,instance=user)
-            formset = ProfileInlineFormset(request.POST,requests.FILES,instance=user)
+            edit_form = EditForm(request.POST,request.FILES,instance=current_user)
+            formset = ProfileInlineFormset(request.POST,request.FILES,instance=current_user)
 
             if edit_form.is_valid():
                 created_user = edit_form.save(commit=False)
@@ -92,3 +92,20 @@ def profile(request):
         return render(request, 'profile.html', {'profile_data': profile_info, "formset": formset, 'created_user': edit_form})
     else:
         raise PermissionDenied
+
+@login_required(login_url='/login')
+def post(request):
+    current_user = request.user
+    timeline_owner = Profile.objects.get(owner_profile=current_user)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.image_link = timeline_owner
+            post.save()
+        return redirect(intro)
+    else:
+        form = PostForm()
+
+    return render(request, 'newpost.html', {"form": form})

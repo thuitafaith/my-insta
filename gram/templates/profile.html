@@ -8,7 +8,7 @@
     <div class="card">
       <div class="card-content">
         <h2 class="flow-text">Update Your Profile</h2>
-        <form class="padding" action="." method="POST">
+        <form class="padding" action="." method="POST" enctype="multipart/form-data">
           {% csrf_token %} {{ created_user.as_p }}
           <div class="divider"></div>
           {{ formset.management_form }}
