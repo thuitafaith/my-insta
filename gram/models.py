@@ -36,9 +36,10 @@ class Image(models.Model):
 
 
 class Profile(models.Model):
-    profile_photo = models.ImageField(upload_to='pics/')
+    profile_photo = models.ImageField(upload_to='pics/',null=True,blank
+                                      =True)
     avatar_thumbnail = ImageSpecField(source='profile_photo',processors=[ResizeToFill(100,50)],format='JPEG',options={'quality': 60})
-    Bio = models.TextField()
+    Bio = models.TextField(blank=True)
     owner_profile = models.OneToOneField(User)
     follow = models.ManyToManyField('self', symmetrical=False, default=False, blank=True)
     email_confirmed = models.BooleanField(default=False)

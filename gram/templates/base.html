@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load bootstrap3 %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,8 +10,7 @@
     <title>Thegram</title>
     {% endif %}
 
-    {% block styles %}
-      {% bootstrap3_css %}
+    {% block styles %} {% bootstrap_css %}
     {% endblock %}
   </head>
   <body>

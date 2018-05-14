@@ -59,3 +59,6 @@ def activate(request, uidb64, token):
         return redirect('signup')
     else:
         return render(request, 'registration/account_activation_invalid.html')
+def intro(request):
+
+    return render(request,'intro.html')
