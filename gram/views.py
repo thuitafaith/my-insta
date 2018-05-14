@@ -8,6 +8,8 @@ from django.template.loader import render_to_string
 from gram.tokens import account_activation_token
 from .models import Image,Profile,Comment
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 
 # Create your views here.

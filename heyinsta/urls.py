@@ -18,10 +18,14 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from gram import views as gram_views
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^signup/', gram_views.signup, name ='signup'),
+    url(r'',include ('gram.urls')),
     url(r'^account_activation_sent/$', gram_views.account_activation_sent, name='account_activation_sent'),
-    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',gram_views.activate, name='activate')
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',gram_views.activate, name='activate'),
+    url(r'^login/$', auth_views.login, name = 'login'),
+    url(r'^logout/$', auth_views.logout,{ 'next_page': '/'}, name = 'logout')
 
 ]
