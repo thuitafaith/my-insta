@@ -67,16 +67,16 @@ def intro(request):
     return render(request,'intro.html')
 
 @login_required(login_url='/login')
-def profile(request, id):
+def profile(request):
     current_user = request.user
     profile_info = User.objects.get(id=current_user.id)
 
-    edit_form = EditForm(instance=user)
+    edit_form = EditForm(instance=current_user)
 
     ProfileInlineFormset = inlineformset_factory(User, Profile, fields=('profile_photo', 'Bio'))
-    formset = ProfileInlineFormset(instance=user)
+    formset = ProfileInlineFormset(instance=current_user)
 
-    if request.user.is_authenticated() and request.user.id == user.id:
+    if current_user.is_authenticated() and request.user.id == current_user.id:
         if request.method == "POST":
             edit_form = EditForm(request.POST.request.FILES,instance=user)
             formset = ProfileInlineFormset(request.POST,requests.FILES,instance=user)
