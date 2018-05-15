@@ -65,7 +65,8 @@ def activate(request, uidb64, token):
 def intro(request):
     current_user = request.user
     images = Image.objects.all()
-
+    image_list=[]
+    for image in images:
 
     return render(request, 'intro.html', {'images': images})
 
@@ -112,3 +113,23 @@ def post(request):
         form = PostForm()
 
     return render(request, 'newpost.html', {"form": form})
+@login_required(login_url='/login')
+def likes(request, id):
+    current_user =request.user
+    img = Image.objects.get(id=image_id)
+    timeline_owner = Profile.objects.get(owner_profile=current_user)
+
+    if request.method == 'POST' and request.is_ajax():
+        like_status = request.POST['like']
+        if like_status == 'true':
+            img.likes.remove(timeline_owner)
+            status = 'unliked'
+
+        if like_status == 'false':
+            img.likes.add(timeline_owner)
+            status = 'liked'
+
+        status = json.dumps(status)
+        return HttpResponse(status, content_type='application/json')
+
+    return redirect(index)```
