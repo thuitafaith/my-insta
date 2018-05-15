@@ -133,4 +133,15 @@ ACCOUNT_ACTIVATION_DAYS = 7 # one-week activation window
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'gram/')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+#DATABASES['default'].update(db_from_env)
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
