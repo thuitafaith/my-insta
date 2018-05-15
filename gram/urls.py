@@ -5,7 +5,8 @@ from . import views
 
 urlpatterns=[
     url(r'^$',views.intro,name = 'intro'),
-    url(r'^profile/',views.profile, name = 'profile')
+    url(r'^profile/',views.profile, name = 'profile'),
+    url(r'^post/', views.post, name = 'post')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

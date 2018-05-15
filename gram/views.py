@@ -10,7 +10,7 @@ from .models import Image,Profile,Comment
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import EditForm
+from .forms import EditForm,PostForm
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import PermissionDenied
 
@@ -63,8 +63,11 @@ def activate(request, uidb64, token):
     else:
         return render(request, 'registration/account_activation_invalid.html')
 def intro(request):
+    current_user = request.user
+    images = Image.objects.all()
 
-    return render(request,'intro.html')
+
+    return render(request, 'intro.html', {'images': images})
 
 @login_required(login_url='/login')
 def profile(request):
@@ -102,7 +105,7 @@ def post(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.image_link = timeline_owner
+            post.owner_profile = timeline_owner
             post.save()
         return redirect(intro)
     else:

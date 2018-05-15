@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Image
 
 
 class SignUpForm(UserCreationForm):
@@ -13,3 +14,8 @@ class EditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email',)
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('image_link', 'name', 'caption')
