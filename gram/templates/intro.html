@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load bootstrap3 %}
-
 {% block content %}
 {% for image in images %}
    <div class='row'>
      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-12">
        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
          <img src="{{image.image_link.url}}" class="img-responsive" alt="Image">
+          <br>{{images.likes.counts}}Likes</br>
+          {{image.image_link}}
+          {% if liked %}
+            <i class="fas fa-heart" data-href="{% url 'likes' image.id %}"></i>
+          {% else %}
+            <i class="far fa-heart" data-href="{% url 'likes' image.id %}"></i>{% endif %}
+    </div>
+  </div>
+</div>
+
+
 {% endfor %}
 {% endblock %}

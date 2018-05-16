@@ -13,6 +13,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import EditForm,PostForm
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import PermissionDenied
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -62,14 +63,18 @@ def activate(request, uidb64, token):
         return redirect('signup')
     else:
         return render(request, 'registration/account_activation_invalid.html')
+
+@csrf_exempt
 def intro(request):
     current_user = request.user
     images = Image.objects.all()
     image_list=[]
     for image in images:
+        image_list.append((image, image.likes.filter(owner_profile=request.user)))
 
-    return render(request, 'intro.html', {'images': images})
+    return render(request, 'intro.html', {'images': image_list})
 
+@csrf_exempt
 @login_required(login_url='/login')
 def profile(request):
     current_user = request.user
@@ -96,7 +101,7 @@ def profile(request):
         return render(request, 'profile.html', {'profile_data': profile_info, "formset": formset, 'created_user': edit_form})
     else:
         raise PermissionDenied
-
+@csrf_exempt
 @login_required(login_url='/login')
 def post(request):
     current_user = request.user
@@ -113,8 +118,10 @@ def post(request):
         form = PostForm()
 
     return render(request, 'newpost.html', {"form": form})
+
+@csrf_exempt
 @login_required(login_url='/login')
-def likes(request, id):
+def likes(request, image_id):
     current_user =request.user
     img = Image.objects.get(id=image_id)
     timeline_owner = Profile.objects.get(owner_profile=current_user)
@@ -132,4 +139,4 @@ def likes(request, id):
         status = json.dumps(status)
         return HttpResponse(status, content_type='application/json')
 
-    return redirect(index)```
+    return redirect(intro)
