@@ -1,0 +1,51 @@
+.navbar {
+  background-color: grey;
+}
+
+#main{
+  font-size: 30px;
+  margin-bottom: 25px;
+
+}
+.fa {
+  padding-left: 20px;
+  padding-bottom: 15px;
+}
+
+.navbar-brand {
+  margin-top: 10px;
+  width: 50px;
+}
+body {
+  background-color: black;
+}
+
+
+
+
+.input-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 68px;
+  padding-left: 40px; }
+  .input-row .submit-like {
+    cursor: pointer;
+    position: absolute;
+    top: 32%;
+    left: 0;
+    color: #C2C2C2;
+    font-size: 24px; }
+    .input-row .submit-like:hover {
+      cursor: pointer; }
+    
+  .input-row .comment-input-wrapper {
+    display: inline-block;
+    color: #262626;
+    font-size: 15px;
+    width: 100%; }
+    .input-row .comment-input-wrapper input {
+      width: 100%;
+      height: 50px;
+      border: none;
+      outline: none; }

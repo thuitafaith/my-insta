@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="profile">
+ <div class="profile_pic">
+   <div class="row">
+     <div class="col-xs-4 left">
+       {% if profile.profile_pic %}
+         <img class="picture-circle" src="{{ profile.profile_photo.url }}">
+       {% else %}
+         <img class="picture-circle" src="{% static 'images/avatar_user.png' %}">
+       {% endif %}
+     </div>
+
+
+{% endblock %}

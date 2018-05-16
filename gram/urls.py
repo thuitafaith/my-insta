@@ -7,7 +7,8 @@ urlpatterns=[
     url(r'^$',views.intro,name = 'intro'),
     url(r'^profile/',views.profile, name = 'profile'),
     url(r'^post/', views.post, name = 'post'),
-    url(r'^likes/(?P<image_id>)/$', views.likes, name = 'likes')
+    url(r'^likes/(?P<image_id>\d+)/$', views.likes, name = 'likes'),
+    url(r'^comment/(?P<image_id>\d+)/$', views.comments, name = 'comments')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

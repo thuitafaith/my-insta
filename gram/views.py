@@ -65,6 +65,7 @@ def activate(request, uidb64, token):
         return render(request, 'registration/account_activation_invalid.html')
 
 @csrf_exempt
+@login_required(login_url='/login')
 def intro(request):
     current_user = request.user
     images = Image.objects.all()
@@ -140,3 +141,34 @@ def likes(request, image_id):
         return HttpResponse(status, content_type='application/json')
 
     return redirect(intro)
+
+@csrf_exempt
+@login_required(login_url='/login')
+def comments(request, image_id):
+    current_user = request.user
+    imge = Image.objects.get(id=image_id)
+    timeline_owner = Profile.objects.get(owner_profile=current_user)
+
+    if request.method == 'POST' and 'comment' in request.POST:
+        comment = request.POST['comment']
+        comment_item = Comment(image=imge,
+                               profile=timeline_owner, comment_post=comment)
+        comment_item.save()
+        comments = Comment.objects.all()
+
+        print(comment)
+
+        # return render_to_response('comment.html', {'comments': comments})
+
+    return redirect(intro)
+
+
+@login_required(login_url='/login')
+def profile_dis(request,username):
+    user = User.objects.get(username=username)
+    if not user:
+        return redirect('intro')
+    profile = Profile.objects.get(user=user)
+
+    name = f"{user.username}"
+    return render(request, profile_display.html, {"name":name,"user":user,"profile":profile})
