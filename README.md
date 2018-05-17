@@ -10,7 +10,7 @@
 
 ## Specifications
 
-> - It enables users to search for images based on their categories.
+> - It enables users to search for images based on their profile.
 > - Users are able to click and view images in a modal.
 
 
@@ -24,15 +24,20 @@
 
 ## Technologies used
 
-> - dj-database-url==0.5.0
-> - Django==1.11
-> - django-bootstrap3==10.0.1
-> - gunicorn==19.8.1
-> - Pillow==5.1.0
-> - psycopg2-binary==2.7.4
-> - python-decouple==3.1
-> - pytz==2018.4
-> - whitenoise==3.3.1
+> - autopep8==1.3.5
+> -confusable-homoglyphs==3.0.0
+> -Django==1.11
+> -django-appconf==1.0.2
+> -django-bootstrap3==10.0.1
+> -django-imagekit==4.0.2
+> -django-registration==2.4.1
+> -pilkit==2.0
+> -Pillow==5.1.0
+> -psycopg2-binary==2.7.4
+> -pycodestyle==2.4.0
+> -python-decouple==3.1
+> -pytz==2018.4
+> -six==1.11.0
 
 
 
