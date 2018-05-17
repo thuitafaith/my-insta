@@ -11,12 +11,11 @@
 ## Specifications
 
 > - It enables users to search for images based on their profile.
-> - Users are able to click and view images in a modal.
-
+> - Users can post pictures and view their profile.
 
 ## Setup/Installation Requirements
 
-> - Click on the Link to the deployed page: [Heroku](https://my-shotss.herokuapp.com/)
+> - Click on the Link to the deployed page: [Heroku](https://heyinsta.herokuapp.com/)
 
 ## Known Bugs
 
