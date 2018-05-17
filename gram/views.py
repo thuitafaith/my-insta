@@ -176,6 +176,8 @@ def profile_dis(request,username):
 login_required(login_url='/login')
 def profile_info(request):
     current_user = request.user
-    profile_info = Profile.objects.filter(owner_profile=current_user.id).all()
 
-    return render(request, 'profile-display.html', {'profile_data': profile_info})
+    profile_info = Profile.objects.filter(owner_profile=current_user.id).all()
+    for p in profile_info:
+        print(p.email_confirmed)
+    return render(request, 'profile_display.html', {'profile_data': profile_info})

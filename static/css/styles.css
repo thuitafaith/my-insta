@@ -17,7 +17,7 @@
   width: 50px;
 }
 body {
-  background-color: #3E9693;
+  background-color: #DFF1F1;
 }
 
 
@@ -59,4 +59,13 @@ body {
 }
 .comments{
   display:block;
+}
+.pf{
+  list-style: none;
+  display: inline-block;
+  margin-right: 5%;
+
+}
+.img-circle{
+  margin-left: 5%;
 }

@@ -44,6 +44,9 @@ class Profile(models.Model):
     profile_follow = models.ManyToManyField('self',symmetrical=False, through='Follow',default=False, blank=True)
     email_confirmed = models.BooleanField(default=False)
 
+    def __str__(self):
+        return str(self.owner_profile)
+
     def add_follow(self,profile, status):
         follow, created = Follow.objects.get_or_create(from_person=self,to_person=profile,status=status)
         return follow
