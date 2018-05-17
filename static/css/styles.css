@@ -1,5 +1,5 @@
 .navbar {
-  background-color: grey;
+  background-color: white;
 }
 
 #main{
@@ -17,7 +17,7 @@
   width: 50px;
 }
 body {
-  background-color: black;
+  background-color: #3E9693;
 }
 
 
@@ -38,7 +38,7 @@ body {
     font-size: 24px; }
     .input-row .submit-like:hover {
       cursor: pointer; }
-    
+
   .input-row .comment-input-wrapper {
     display: inline-block;
     color: #262626;
@@ -49,3 +49,14 @@ body {
       height: 50px;
       border: none;
       outline: none; }
+
+.img-responsive{
+    display: block;
+    margin-left: 50%;
+    margin-right: 50%;
+    width: 60%;
+
+}
+.comments{
+  display:block;
+}
