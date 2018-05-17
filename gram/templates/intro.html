@@ -5,9 +5,9 @@
 {% for image, liked in images %}
    <div class='row'>
      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-12">
-       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+       <div class="well home-d col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-         <img src="{{image.image_link.url}}" class="img-responsive" alt="Image" class="center">
+         <img src="{{image.image_link.url}}" class="img-responsive" alt="Image">
           <br>{{image.likes.count}} Likes</br>
           {% if liked %}
             <i class="fas fa-heart" data-href="{% url 'likes' image.id %}"></i>
@@ -26,12 +26,13 @@
           <!-- <input class="btn btn-primary" type="submit" value="..."> -->
         </form>
         </section>
-        <div class="comments">
+        <div class="comments" style="margin-left:5%;">
         {% for comment in image.comment_set.all %}
         <strong>{{comment.profile.owner_profile.username}}</strong>
-        {{comment.comment_post}}
-        </div>
+        {{comment.comment_post}}<br>
+
         {% endfor %}
+      </div>
     </div>
   </div>
 </div>

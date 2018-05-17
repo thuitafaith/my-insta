@@ -19,8 +19,14 @@
 body {
   background-color: #DFF1F1;
 }
-
-
+/* .home-d  {
+  margin-left: 20%;
+  width:60%;
+} */
+.home-d >img {
+  display: inline;
+  width: 100%;
+}
 
 
 .input-row {
@@ -51,12 +57,14 @@ body {
       outline: none; }
 
 .img-responsive{
-    display: block;
-    margin-left: 50%;
-    margin-right: 50%;
+    display: inline-block;
+
+    /* margin-right: 20%; */
     width: 60%;
 
-}
+}.well{  margin-left: 20%;
+  margin-right: 20%;
+  width: 60%;}
 .comments{
   display:block;
 }
